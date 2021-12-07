@@ -34,12 +34,12 @@
 		"display-name": "Snowfall",
 		"soft-require": {
 			"phpbb/phpbb": ">= 3.2.6,<3.4.0@dev"
-		}
-	},
+		},
 		"version-check": {
 			"host": "raw.githubusercontent.com",
 			"directory": "/chris1278/snowfall/main",
 			"filename": "snowfall.json",
 			"ssl": true
-		}
+	}
+	}
 }
