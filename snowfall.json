@@ -1,7 +1,7 @@
 {
 	"stable": {
 		"2.0": {
-			"current": "2.0.2",
+			"current": "2.0.3",
 			"download": "https://github.com/chris1278/snowfall",
 			"announcement": "https://www.phpbb.de/community/viewtopic.php?t=245907",
 			"eol": null,
