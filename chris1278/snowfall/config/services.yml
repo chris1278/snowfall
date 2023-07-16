@@ -1,0 +1,21 @@
+services:
+    chris1278.snowfall.controller.acp:
+        class: chris1278\snowfall\controller\acp_controller
+        arguments:
+            - '@ext.manager' 
+            - '@config'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@user'
+    chris1278.snowfall.listener:
+        class: chris1278\snowfall\event\listener
+        arguments:
+            - '@config'
+            - '@auth'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@user'
+        tags:
+            - { name: event.listener }

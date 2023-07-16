@@ -1,0 +1,45 @@
+/**
+*
+* Snowfall - is based on the snippet Snowfall - Snow by Dr Death. An extension for the phpBB Forum Software package.
+*
+* @copyright (c) 2021, Chris1278, https://christian-esch.de
+* @copyright (c) 2014 - 2021, kirk, http://reyno41.bplaced.net/phpbb/
+* @copyright (c) 2008,Dr Death, http://www.lpi-clan.de/
+* @license GNU General Public License, version 2 (GPL-2.0)
+*
+*/
+
+fieldset {
+	border-radius: 10px;
+}
+
+.chris1278_acp_copyright {
+	margin-top: 1em;
+	text-align: center;
+	font-size: .75em;
+}
+
+#sinfolegend {
+	text-align: left;
+	color: red;
+}
+
+#sinfo {
+	text-align: center;
+}
+
+#prev {
+	background-color: transparent;
+	border: 1px solid #000000;
+	padding: 0px 5px;
+	display: table;
+}
+
+.snowfont {
+	font-size: 14px;
+}
+
+.fontwarning {
+	color: #FF0000;
+	font-size: 24px;
+}

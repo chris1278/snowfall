@@ -1,0 +1,8 @@
+{% INCLUDEJS '@chris1278_snowfall/snow.js' %}
+<script>
+function snow()
+{
+	Falling({{ T_SNOWMAX }},'{% if T_SNOWGIF == 2 %}<i style="color: #{{ T_SNOWCOLOR|escape("css") }}; font-size: {{ T_SNOWSIZE|escape("css") }}px;" class="icon {{ T_SNOWFAI }} fa-fw" aria-hidden="true"></i>{% endif %} 	{% if T_SNOWGIF == 1 %}<img src="{T_EXT_SNOWFALL_PATH}styles/all/theme/images/snow.gif">{% endif %}{% if T_SNOWGIF == 0 %}<b style="color: #{{ T_SNOWCOLOR|escape("css") }}; font-size: {{ T_SNOWSIZE|escape("css") }}px; font-family: {{ T_SNOWFONT|escape("css") }};"> {{ T_SNOWLETTER }} </b> {% endif %}');
+}
+let iconspeed = {{ T_SINKSPEED|json_encode|raw }};
+</script>

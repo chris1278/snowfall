@@ -1,0 +1,115 @@
+{% INCLUDECSS '@chris1278_snowfall/css/acp_snowfall.css' %}
+{% include 'overall_header.html' %}
+
+<a id="maincontent"></a>
+	<h1>{{ lang('ACP_CHRIS_SNOWFALL') }}</h1>
+	<p>{{ lang('SF_CONFIG_DESC', SF_EXT_NAME, SF_EXT_VER) }}</p>
+	<fieldset id="sinfo">
+		<legend id="sinfolegend">{{ lang('ACP_SNOXINFOBOX') }}</legend>
+		{{lang('ACP_SNOWINFO') }}
+	</fieldset>
+
+{% if S_ERROR %}
+	<div class="errorbox">
+		<h3>{{ lang('WARNING') }}</h3>
+		<p>{{ ERROR_MSG }}</p>
+	</div>
+{% endif %}
+{% if SF_NOTES %}
+	<div class="errorbox notice">
+		{{ SF_NOTES }}
+	</div>
+{% endif %}
+<form id="acp_snowfall" method="post" action="{{ U_ACTION }}">
+	<fieldset>
+		<dl>
+			<dt><label>{{ lang('SNOWMAX') ~ lang('COLON') }}</label><br><span>{{ lang('SNOWMAX_EXPLAIN') }}</span></dt>
+			<dd><input type="number" name="snowmax" min="1" max="100" step="1" value="{{ SNOWMAX }}" placeholder="{{ lang('ACP_SNOWMAX') }}"></dd>
+		</dl>
+		<dl>
+			<dt><label>{{ lang('SINKSPEED') ~ lang('COLON') }}</label><br><span>{{ lang('SINKSPEED_EXPLAIN') }}</span></dt>
+			<dd>
+				<input id="sinkspeed" name="sinkspeed" type="number" min="20" max="100" step="1.0" value="{{ SINKSPEED }}" placeholder="{{ lang('ACP_SINKSPEED') }}">
+			</dd>
+		</dl>
+		<dl id="snowgif">
+			<dt><label>{{ lang('SNOWGIF') ~ lang('COLON') }}</label><br><span>{{ lang('SNOWGIF_EXPLAIN') }}</span></dt>
+			<dd><select name="snowgif" onchange="snowfallACP.setState()">
+					<option id="snowgif_2" value="2" {% if SNOWGIF == 2 %}selected="selected" {% endif %}>{{ lang('ACP_FA') }}</option>
+					<option id="snowgif_1" value="1" {% if SNOWGIF == 1 %}selected="selected"{% endif %}>{{ lang('ACP_GIF') }}</option>
+					<option id="snowgif_0" value="0" {% if SNOWGIF == 0 %}selected="selected"{% endif %}>{{ lang('ACP_CUSTOM') }}</option>
+				</select>
+			</dd>
+		</dl>
+		<div id="gifoption">
+			<dl>
+				<dt><label>{{ lang('SNOWSIZE') ~ lang('COLON') }}</label><br><span>{{ lang('SNOWSIZE_EXPLAIN') }}</span></dt>
+				<dd><input type="number" name="snowsize" min="12" max="100" step="1" value="{{ SNOWSIZE }}" /></dd>
+			</dl>	
+			<dl>
+				<dt><label>{{ lang('SNOWCOLOR') ~ lang('COLON') }}</label><br><span>{{ lang('SNOWCOLOR_EXPLAIN') }}</span></dt>
+				<dd>
+				#<input name="snowcolor" type="text" id="snowcolor" value="{SNOWCOLOR}" size="6" maxlength="6" placeholder="{{ lang('ACP_SNOWCOLOR') }}">
+				<span style="background-color: #{SNOWCOLOR}">&nbsp; &nbsp;</span><span>
+				[ <a href="#" id="color_palette_toggle">{L_COLOUR_SWATCH}</a> ]</span>
+				<div id="color_palette_placeholder" style="display: none;" data-color-palette="h" data-height="12" data-width="15" data-target="#snowcolor"></div>
+				</dd>
+			</dl>
+		</div>
+		<div id="fontawesomeblock">
+			<dl>
+				<dt><label>{{ lang('SNOWFAI') ~ lang('COLON') }}</label><br><span>{{ lang('SNOWFAI_EXPLAIN') }}</span></dt>
+				<dd><input type="text" name="snowfai" value="{{ SNOWFAI}}" placeholder="{{ lang('ACP_SNOWFAI') }}"></dd>
+			</dl>
+		</div>
+		<div id="usersettingblock">
+			<dl>
+				<dt><label>{{ lang('SNOWLETTER') ~ lang('COLON') }}</label><br><span>{{ lang('SNOWLETTER_EXPLAIN') }}</span></dt>
+				<dd><input type="text" name="snowletter" maxlength="255" size="40" value="{{ SNOWLETTER }}" placeholder="{{ lang('ACP_SNOWLETTER') }}"></dd>
+			</dl>
+			<br><br>
+			<dl>
+				<dt><label>{{ lang('SNOWFONT') ~ lang('COLON') }}</label><br><span>{{ lang('SNOWFONT_EXPLAIN') }}</span></dt>
+				<dd>
+					<select  name="snowfont" id="snowfont" onchange="snowfontstyle('[font=' + this.form.snowfall_font.options[this.form.snowfall_font.selectedIndex].value + ']', '[/font]');">
+						
+							<optgroup label="{{ lang('USED_FONT') }}">
+							<option selected="selected" value="{{ SNOWFONT }}">{% if SNOWFONT == "" %}{{ lang('OPTION_CHANGE') }}{% else %}{{ SNOWFONT }}{% endif %}</option>
+							</optgroup>
+							<optgroup label="{{ lang('SAVE_FONTS') }}">
+							{% set safeFonts = ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Georgia', 'Impact', 'Times New Roman', 'Tahoma', 'Trebuchet MS', 'Verdana'] %}
+							{% for SNOWFONT in safeFonts|sort %}
+							<option class="snowfont" style="font-family:'{{ SNOWFONT }}',sans-serif;" value="{{ SNOWFONT }}">{{ SNOWFONT }}</option>
+							{% endfor %}
+							</optgroup>
+							<optgroup label="{{ lang('FANTASY_FONTS') }}">
+								{% for SNOWFONT in ['Bradley Hand ITC', 'Century Gothic', 'Curlz MT', 'cursive', 'fantasy', 'French Script MT', 'Garamond', 'Garamond Bold', 'Goudy Stout', 'Helvetica', 'monospace', 'OCR A Extended', 'Script MT Bold'] %}
+									<option class="snowfont" style="font-family:'{{ SNOWFONT }}',sans-serif;" value="{{ SNOWFONT }}">{{ SNOWFONT }}</option>
+								{% endfor %}
+							</optgroup>
+							<optgroup label="{{ lang('WINDOWS_FONTS') }}">
+								{% for SNOWFONT in ['Lucida Console', 'Lucida Sans Unicode', 'MS Mincho', 'Palatino Linotype', 'Symbol'] %}
+									<option class="snowfont" style="font-family:'{{ SNOWFONT }}',sans-serif;" value="{{ SNOWFONT }}">{{ SNOWFONT }}</option>
+								{% endfor %}
+							</optgroup>
+					</select>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label>{{ lang('ACP_PREVIEW') ~ lang('COLON') }}</label></dt>
+				<dd><b id="prev" style="color: #{{ SNOWCOLOR }}; font-size: {{ SNOWSIZE }}px; font-family: {{ SNOWFONT }};">{{ SNOWLETTER }}</b></dd>
+			</dl>	
+		</div>		
+	</fieldset>
+	<fieldset class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">&nbsp;
+		{{ S_FORM_TOKEN }}
+	</fieldset>
+	<p class="chris1278_acp_copyright">
+		{{ SF_EXT_NAME }} &copy; Chris1278<br>
+		{{ lang('SF_LANG_DESC') }} {{ lang('SF_LANG_EXT_VER') }} &bull; {{ lang('SF_LANG_AUTHOR') }}
+	</p>
+</form>
+
+{% INCLUDEJS '@chris1278_snowfall/acp_snowfalldimmer.js' %}
+{% include 'overall_footer.html' %}

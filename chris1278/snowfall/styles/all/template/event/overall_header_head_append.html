@@ -1,0 +1,41 @@
+{#
+*
+* Snowfall - is based on the snippet Snowfall - Snow by Dr Death. An extension for the phpBB Forum Software package.
+*
+* @copyright (c) 2021, Chris1278, https://christian-esch.de
+* @copyright (c) 2014 - 2021, kirk, http://reyno41.bplaced.net/phpbb/
+* @copyright (c) 2008,Dr Death, http://www.lpi-clan.de/
+* @license GNU General Public License, version 2 (GPL-2.0)
+*
+#}
+{% if S_SNOWFALL or !SNOWFALL_AUTH %}
+
+<script>
+	var onload_functions = new Array();
+	var onunload_functions = new Array();
+
+	/**
+	* New function for handling multiple calls to window.onload and window.unload by pentapenguin
+	*/
+	window.onload = function()
+	{
+		for (var i = 0; i < onload_functions.length; i++)
+		{
+			eval(onload_functions[i]);
+		}
+	};
+
+	window.onunload = function()
+	{
+		for (var i = 0; i < onunload_functions.length; i++)
+		{
+			eval(onunload_functions[i]);
+		}
+	};
+
+	onload_functions.push('snow();');
+</script>
+{% INCLUDE '@chris1278_snowfall/snowconfig.html' %}
+{% endif %}
+
+
